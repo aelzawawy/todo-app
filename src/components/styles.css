@@ -1,0 +1,137 @@
+@import "../App.css";
+.input {
+  position: relative;
+  display: flex;
+  width: 90%;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+
+  .input__box {
+    width: 100%;
+    border-radius: 50px;
+    padding: 20px 30px;
+    font-size: 25px;
+    border: none;
+    outline: none;
+    transition: all 0.2s;
+    box-shadow: inset 0 0 5px var(--accent-color);
+  }
+  .input__box::placeholder {
+    color: var(--accent-color);
+  }
+  .input__box:focus {
+    box-shadow: 0 0 10px 1000px rgba(0, 0, 0, 0.452);
+  }
+
+  .input__submit {
+    position: absolute;
+    right: 10px;
+    width: 50px;
+    aspect-ratio: 1/1;
+    border: none;
+    font-size: 1rem;
+    border-radius: 50px;
+    background-color: var(--accent-color);
+    color: white;
+    box-shadow: 0 0 10px var(--accent-color);
+    transition: all 0.2s;
+  }
+  .input__submit:hover {
+    background-color: var(--accent-color--l1);
+  }
+  .input__submit:active {
+    scale: 0.85;
+  }
+}
+.container {
+  display: flex;
+  padding: 10px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+.todosList.completed {
+  background-color: rgb(253, 103, 80);
+  .title {
+    color: white;
+  }
+}
+.todosList {
+  display: flex;
+  width: 49.5%;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  background-color: var(--secondary-color);
+  gap: 10px;
+  padding: 10px 10px;
+  border-radius: 5px;
+  .title {
+    color: var(--accent-color);
+    font-size: 1.5rem;
+    padding-left: 10px;
+    text-align: start;
+    white-space: nowrap;
+  }
+  .todosListItem {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 20px 10px;
+    font-size: 1.5rem;
+    border-radius: 5px;
+    background: url("https://img.freepik.com/free-photo/crumpled-yellow-paper-background-close-up_60487-2390.jpg?size=626&ext=jpg");
+    color: black;
+    transition: all 0.2s;
+    .updateField {
+      flex: 1;
+      font-size: inherit;
+      border: none;
+      border-bottom: 2px solid black;
+      outline: none;
+      background-color: transparent;
+      font-family: inherit;
+    }
+
+    .taskBody {
+      flex: 1;
+      text-align: start;
+    }
+    .taskActions {
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 10px;
+      .icon {
+        transform: translateY(4px);
+        transition: all 0.2s;
+      }
+      .icon:hover {
+        color: white;
+        scale: 1.2;
+        cursor: pointer;
+      }
+    }
+  }
+}
+.todosListItem:hover {
+  box-shadow: 0 0 10px var(--accent-color);
+  scale: 1.03;
+}
+.todosList.dragActive {
+  box-shadow: 0 0 10px white;
+}
+
+@media (width < 600px) {
+  .container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .todosList{
+    width: 90%;
+  }
+}
+@media (width > 600px) {
+  .todosList{
+    width: 37%;
+  }
+}
