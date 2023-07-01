@@ -26,7 +26,7 @@ const TodosList: React.FC<Props> = ({
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <div className="title">Active Tasks:</div>
+            <div className="title">Active Tasks :</div>
             {tasks.map((task, index) => (
               <TodoListItem
                 key={task.id}
@@ -49,7 +49,7 @@ const TodosList: React.FC<Props> = ({
             ref={provided.innerRef}
             {...provided.droppableProps}
           >
-            <div className="title">Active Tasks:</div>
+            <div className="title">Completed Tasks :</div>
             {completedTasks.map((task, index) => (
               <TodoListItem
                 key={task.id}

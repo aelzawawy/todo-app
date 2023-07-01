@@ -3,14 +3,16 @@ import { DragDropContext, DropResult } from "react-beautiful-dnd";
 import "./App.css";
 import InputField from "./components/InputField";
 import TodosList from "./components/TodosList";
-import { Task } from "./taskModel";
+import useLocalStorage from "./customeHooks/useLocalStorage";
 
 const App: React.FC = () => {
   // New input value
   const [newTask, setNewTask] = useState<string>("");
-  // All tasks
-  const [tasks, setTasks] = useState<Task[]>([]);
-  const [completedTasks, setCompletedTasks] = useState<Task[]>([]);
+
+  // Saving tasks to local storage
+  const [tasks, setTasks] = useLocalStorage("tasks", []);
+  const [completedTasks, setCompletedTasks] = useLocalStorage("completed", []);
+
   // Adding new task
   const addNewTask = (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,13 +34,15 @@ const App: React.FC = () => {
     let selectedTask,
       active = tasks,
       completed = completedTasks;
-    
+
     // Remove selected task from source
     if (source.droppableId === "Active") {
       selectedTask = active[source.index];
+      selectedTask = {...selectedTask, isDone: true}
       active.splice(source.index, 1);
     } else {
       selectedTask = completed[source.index];
+      selectedTask = {...selectedTask, isDone: false}
       completed.splice(source.index, 1);
     }
 
@@ -48,9 +52,14 @@ const App: React.FC = () => {
     } else {
       completed.splice(destination.index, 0, selectedTask);
     }
+    
+    //! These don't trigger the hook because React does not detect a change in the state references
+    //! setTasks(active);
+    //! setCompletedTasks(completed);
 
-    setTasks(active);
-    setCompletedTasks(completed);
+    // By creating new arrays, new references are provided
+    setTasks([...active]);
+    setCompletedTasks([...completed]);
   };
   return (
     <DragDropContext onDragEnd={onDragEnd}>
